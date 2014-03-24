@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6475C9C18E024600014ECD5 /* GLChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6475C9B18E024600014ECD5 /* GLChartCell.m */; };
 		E697EC0D18DC1DCC0046ED1D /* GLLandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E697EC0C18DC1DCC0046ED1D /* GLLandViewController.m */; };
 		E697EC1218DE81BC0046ED1D /* GLChartDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E697EC1118DE81BC0046ED1D /* GLChartDomain.m */; };
 		E6EDA6C418D9713700D533C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EDA6C318D9713700D533C5 /* Foundation.framework */; };
@@ -24,7 +25,6 @@
 		E6EDA6ED18D9713700D533C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6EDA6EB18D9713700D533C5 /* InfoPlist.strings */; };
 		E6EDA6EF18D9713700D533C5 /* GLLineChartViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA6EE18D9713700D533C5 /* GLLineChartViewTests.m */; };
 		E6EDA6FC18D972C200D533C5 /* GLLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA6FB18D972C200D533C5 /* GLLineChartView.m */; };
-		E6EDA70418D97FD100D533C5 /* GLChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA70318D97FD100D533C5 /* GLChartCell.m */; };
 		E6EDA70718D9857500D533C5 /* GLChartCellLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA70618D9857500D533C5 /* GLChartCellLayer.m */; };
 		E6EDA70A18DAE07000D533C5 /* GLCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA70918DAE07000D533C5 /* GLCollectionViewLayout.m */; };
 		E6EDA70D18DAF35700D533C5 /* GLCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDA70C18DAF35700D533C5 /* GLCollectionHeader.m */; };
@@ -41,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6475C9A18E024600014ECD5 /* GLChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLChartCell.h; sourceTree = "<group>"; };
+		E6475C9B18E024600014ECD5 /* GLChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLChartCell.m; sourceTree = "<group>"; };
 		E697EC0B18DC1DCC0046ED1D /* GLLandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLandViewController.h; sourceTree = "<group>"; };
 		E697EC0C18DC1DCC0046ED1D /* GLLandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLandViewController.m; sourceTree = "<group>"; };
 		E697EC1018DE81BC0046ED1D /* GLChartDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLChartDomain.h; sourceTree = "<group>"; };
@@ -66,8 +68,6 @@
 		E6EDA6EE18D9713700D533C5 /* GLLineChartViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLLineChartViewTests.m; sourceTree = "<group>"; };
 		E6EDA6FA18D972C200D533C5 /* GLLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLineChartView.h; sourceTree = "<group>"; };
 		E6EDA6FB18D972C200D533C5 /* GLLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLineChartView.m; sourceTree = "<group>"; };
-		E6EDA70218D97FD100D533C5 /* GLChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLChartCell.h; path = GLLineChartView/GLChartCell.h; sourceTree = SOURCE_ROOT; };
-		E6EDA70318D97FD100D533C5 /* GLChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLChartCell.m; path = GLLineChartView/GLChartCell.m; sourceTree = SOURCE_ROOT; };
 		E6EDA70518D9857500D533C5 /* GLChartCellLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLChartCellLayer.h; sourceTree = "<group>"; };
 		E6EDA70618D9857500D533C5 /* GLChartCellLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLChartCellLayer.m; sourceTree = "<group>"; };
 		E6EDA70818DAE07000D533C5 /* GLCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -179,10 +179,10 @@
 		E6EDA6F918D972AC00D533C5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E6475C9A18E024600014ECD5 /* GLChartCell.h */,
+				E6475C9B18E024600014ECD5 /* GLChartCell.m */,
 				E6EDA70518D9857500D533C5 /* GLChartCellLayer.h */,
 				E6EDA70618D9857500D533C5 /* GLChartCellLayer.m */,
-				E6EDA70218D97FD100D533C5 /* GLChartCell.h */,
-				E6EDA70318D97FD100D533C5 /* GLChartCell.m */,
 				E6EDA6FA18D972C200D533C5 /* GLLineChartView.h */,
 				E6EDA6FB18D972C200D533C5 /* GLLineChartView.m */,
 				E6EDA70818DAE07000D533C5 /* GLCollectionViewLayout.h */,
@@ -298,7 +298,7 @@
 				E6EDA70A18DAE07000D533C5 /* GLCollectionViewLayout.m in Sources */,
 				E6EDA6D018D9713700D533C5 /* main.m in Sources */,
 				E6EDA6DA18D9713700D533C5 /* GLViewController.m in Sources */,
-				E6EDA70418D97FD100D533C5 /* GLChartCell.m in Sources */,
+				E6475C9C18E024600014ECD5 /* GLChartCell.m in Sources */,
 				E6EDA6D418D9713700D533C5 /* GLAppDelegate.m in Sources */,
 				E6EDA70718D9857500D533C5 /* GLChartCellLayer.m in Sources */,
 				E6EDA70D18DAF35700D533C5 /* GLCollectionHeader.m in Sources */,
