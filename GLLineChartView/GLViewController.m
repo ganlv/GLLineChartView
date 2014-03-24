@@ -7,9 +7,14 @@
 //
 
 #import "GLViewController.h"
+#import "GLChartCell.h"
+#import "GLCollectionHeader.h"
+#import "GLLandViewController.h"
 
 @interface GLViewController ()
-
+{
+    NSMutableArray *_points;
+}
 @end
 
 @implementation GLViewController
@@ -17,13 +22,173 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor purpleColor];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        // iOS 7
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    }
+
+    
+    [self initData];
+    
+    self.lineChartView.dataSource = self;
+    [self.lineChartView reloadData];
+   
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(orientationChanged:)     name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice] ];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.lineChartView goToday:NO];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;//隐藏为YES，显示为NO
+}
+
+-(void)orientationChanged:(NSNotification*)notification
+{
+    UIDevice *device =  notification.object;
+    UIDeviceOrientation orientation  = device.orientation;
+    
+    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight ){
+        _lineChartView.bounds = CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+        _lineChartView.center = CGPointMake(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+        [_lineChartView rotationSubViews];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            if(orientation == UIDeviceOrientationLandscapeLeft){
+                CATransform3D transformFromChartView = CATransform3DMakeRotation(degreesToRadians(90), 0, 0, 1.0);
+                _lineChartView.layer.transform  = transformFromChartView;
+                
+            }else if(orientation == UIDeviceOrientationLandscapeRight){
+                CATransform3D transformFromChartView = CATransform3DMakeRotation(degreesToRadians(-90), 0, 0, 1.0);
+                _lineChartView.layer.transform  = transformFromChartView;
+            }
+        }];
+    }else{
+         _lineChartView.bounds = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [_lineChartView rotationSubViews];
+        [_lineChartView reloadData];
+        [UIView animateWithDuration:0.3 animations:^{
+            _lineChartView.layer.transform  = CATransform3DIdentity;
+        }];
+    }
+}
+
+-(void)initData
+{
+    _points = [[NSMutableArray alloc] init];
+
+    for (int j=0; j< 12; j++) {
+        NSMutableArray *innerPoints = [NSMutableArray array];
+
+        int randomCount = arc4random() %10 +2;
+        for (int i = 0; i <randomCount ; i++) {
+            CGFloat red  = arc4random()%30+60;
+            CGFloat oldRed =arc4random()%20 +30;
+            
+            GLChartDomain *chartDomain =[[GLChartDomain alloc] init];
+            NSCalendar *calendar =[NSCalendar currentCalendar];
+            NSDateComponents *component = [[NSDateComponents alloc] init];
+            component.year = 2014;
+            component.month = j+1;
+            component.day = i + 12;
+            NSDate *date = [calendar  dateFromComponents:component];
+            
+            chartDomain.nowPercent = red;
+            chartDomain.oldPercent = oldRed;
+            chartDomain.date = date;
+            [innerPoints addObject:chartDomain];
+        }
+        [_points addObject:innerPoints];
+    }
+}
+
+-(void)updateData
+{
+    NSArray *_pointArray = [_points copy];
+    [_points removeAllObjects];
+    
+    for (int j=0; j< [_pointArray count]; j++) {
+        
+        NSMutableArray *innerPoints = [NSMutableArray array];
+        
+        for (int i = 0; i < [[_pointArray objectAtIndex:j] count]   ; i++) {
+            CGFloat red  = arc4random()%30+60;
+            CGFloat oldRed =arc4random()%20 +30;
+            NSCalendar *calendar =[NSCalendar currentCalendar];
+            NSDateComponents *component = [[NSDateComponents alloc] init];
+            component.year = 2014;
+            component.month = j+1;
+            component.day = i + 12;
+            NSDate *date = [calendar  dateFromComponents:component];
+            
+            GLChartDomain *chartDomain =[[GLChartDomain alloc] init];
+            chartDomain.nowPercent = red;
+            chartDomain.oldPercent = oldRed;
+            chartDomain.date = date;
+            [innerPoints addObject:chartDomain];
+        }
+        [_points addObject:innerPoints];
+    }
+    [_lineChartView updateVisible];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)button:(id)sender {
+    [self updateData];
+}
+#pragma mark datasource
+-(NSInteger)numbeOfSections:(GLLineChartView*)lineChartView
+{
+    return [_points count];
+}
+-(NSInteger)lineChartView:(GLLineChartView*)lineChartView numberOfItemsInSection:(NSInteger)section
+{
+    return [[_points objectAtIndex:section] count];
+}
+
+-(GLChartDomain*)lineChartView:(GLLineChartView*)lineChartView chartDomainOfIndex:(NSIndexPath*)indexPath
+{
+    NSArray *_subPoints =  [_points objectAtIndex:indexPath.section];
+    if(indexPath.item >= [_subPoints count]){
+        return nil;
+    }
+    return [_subPoints objectAtIndex:indexPath.item];
+}
+
+#pragma mark rotation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    return NO;
+}
+
+// New Autorotation support.
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (IBAction)switchData:(id)sender {
+    [self updateData];
+}
+
+- (IBAction)today:(id)sender {
+    [self.lineChartView goToday:YES];
+}
 @end

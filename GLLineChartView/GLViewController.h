@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLLineChartView.h"
+#import "GLCollectionViewLayout.h"
 
-@interface GLViewController : UIViewController
+@interface GLViewController : UIViewController<GLLineChartViewDataSource>
+
+@property (strong, nonatomic) IBOutlet GLLineChartView *lineChartView;
+
+- (IBAction)switchData:(id)sender;
+- (IBAction)today:(id)sender;
 
 @end
