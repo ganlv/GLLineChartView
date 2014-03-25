@@ -10,7 +10,9 @@
 
 @interface GLChartDomain : NSObject
 
-@property (nonatomic,retain) NSDate *date;
+@property (nonatomic,retain) NSString *mainText;
+@property (nonatomic,retain) NSString *detailText;
+
 @property (nonatomic,assign) CGFloat oldPercent;
 @property (nonatomic,assign) CGFloat nowPercent;
 

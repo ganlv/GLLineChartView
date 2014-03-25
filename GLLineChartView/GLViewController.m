@@ -101,10 +101,14 @@
             component.month = j+1;
             component.day = i + 12;
             NSDate *date = [calendar  dateFromComponents:component];
-            
+            component = [calendar components:NSCalendarUnitWeekday|NSCalendarUnitDay  fromDate:date];
+            NSString *week =  [self weekStringFromNumber:component.weekday];
+            NSString *day =  [NSString stringWithFormat:@"%ld",(long)component.day];
+
             chartDomain.nowPercent = red;
             chartDomain.oldPercent = oldRed;
-            chartDomain.date = date;
+            chartDomain.mainText = week;
+            chartDomain.detailText = day;
             [innerPoints addObject:chartDomain];
         }
         [_points addObject:innerPoints];
@@ -129,11 +133,16 @@
             component.month = j+1;
             component.day = i + 12;
             NSDate *date = [calendar  dateFromComponents:component];
-            
+            component = [calendar components:NSCalendarUnitWeekday|NSCalendarUnitDay  fromDate:date];
+
+            NSString *week =  [self weekStringFromNumber:component.weekday];
+            NSString *day =  [NSString stringWithFormat:@"%ld",(long)component.day];
+
             GLChartDomain *chartDomain =[[GLChartDomain alloc] init];
             chartDomain.nowPercent = red;
             chartDomain.oldPercent = oldRed;
-            chartDomain.date = date;
+            chartDomain.mainText = week;
+            chartDomain.detailText = day;
             [innerPoints addObject:chartDomain];
         }
         [_points addObject:innerPoints];
@@ -166,6 +175,35 @@
         return nil;
     }
     return [_subPoints objectAtIndex:indexPath.item];
+}
+
+-(NSString*)lineChartView:(GLLineChartView *)lineChartView titleOfIndex:(NSIndexPath *)indexPath
+{
+    return [NSString stringWithFormat:@"%ld月",indexPath.section+1];
+}
+
+-(NSString*)weekStringFromNumber:(NSInteger)number
+{
+    switch (number) {
+        case 1:
+            return @"周日";
+            break;
+        case 2:
+            return @"周一";
+        case 3:
+            return @"周二";
+        case 4:
+            return @"周三";
+        case 5:
+            return @"周四";
+        case 6:
+            return @"周五";
+        case 7:
+            return @"周六";
+        default:
+            break;
+    }
+    return nil;
 }
 
 #pragma mark rotation

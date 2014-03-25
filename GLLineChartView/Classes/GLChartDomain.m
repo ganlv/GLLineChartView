@@ -9,7 +9,8 @@
 #import "GLChartDomain.h"
 
 @implementation GLChartDomain
-@synthesize date;
+@synthesize mainText;
+@synthesize detailText;
 @synthesize oldPercent;
 @synthesize nowPercent;
 

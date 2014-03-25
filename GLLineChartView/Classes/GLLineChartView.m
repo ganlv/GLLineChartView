@@ -73,11 +73,8 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     GLCollectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HEAD_INDENTIFIER forIndexPath:indexPath];
-    GLChartDomain *domain = [self chartDomainOfIndex:indexPath];
-    NSCalendar *calendar =  [NSCalendar  currentCalendar];
-    NSDateComponents *component = [calendar components:NSCalendarUnitMonth fromDate:domain.date];
-    [header setTitle:[NSString stringWithFormat:@"%ld月",(long)component.month]];
-    
+    NSString *title = [dataSource lineChartView:self titleOfIndex:indexPath];
+    [header setTitle:title];
     return header;
 }
 
@@ -159,12 +156,7 @@
     [cell setChartLine:chartLine  oldChartLine:oldChartLine showStart:[self needShowStart:indexPath]  showEnd:[self needShowEnd:indexPath]];
     
     
-    NSCalendar *calendar =  [NSCalendar  currentCalendar];
-    NSDateComponents *component = [calendar components:NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:currentDomain.date];
-    NSString *week =  [self weekStringFromNumber:component.weekday];
-    NSString *day =  [NSString stringWithFormat:@"%ld",(long)component.day];
-    
-    [cell setWeek:week day:day];
+    [cell setMain:currentDomain.mainText detail:currentDomain.detailText];
     [cell needEndHeadLine:[self isSectionLastItem:indexPath]];
 }
 
@@ -243,30 +235,6 @@
     _collectionView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     [_collectionView reloadData];
     [_collectionView scrollToItemAtIndexPath:showIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-}
-
--(NSString*)weekStringFromNumber:(NSInteger)number
-{
-    switch (number) {
-        case 1:
-            return @"周日";
-            break;
-        case 2:
-            return @"周一";
-        case 3:
-            return @"周二";
-        case 4:
-            return @"周三";
-        case 5:
-            return @"周四";
-        case 6:
-            return @"周五";
-        case 7:
-            return @"周六";
-        default:
-            break;
-    }
-    return nil;
 }
 
 @end

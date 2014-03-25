@@ -21,6 +21,7 @@
 -(NSInteger)lineChartView:(GLLineChartView*)lineChartView numberOfItemsInSection:(NSInteger)section;
 
 -(GLChartDomain*)lineChartView:(GLLineChartView*)lineChartView chartDomainOfIndex:(NSIndexPath*)indexPath;
+-(NSString*)lineChartView:(GLLineChartView*)lineChartView titleOfIndex:(NSIndexPath*)indexPath;
 
 @end
 

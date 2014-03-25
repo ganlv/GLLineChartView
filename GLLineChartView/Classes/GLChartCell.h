@@ -18,6 +18,6 @@
 @interface GLChartCell : UICollectionViewCell
 
 -(void)setChartLine:(GLChartLine)chartLine oldChartLine:(GLChartLine)oldChartLine showStart:(BOOL)showStart showEnd:(BOOL)showEnd;
--(void)setWeek:(NSString*)week day:(NSString*)day;
+-(void)setMain:(NSString*)main detail:(NSString*)detail;
 -(void)needEndHeadLine:(BOOL)needHeadLine;
 @end

@@ -112,7 +112,7 @@
     [layer setShowEnd:showEnd];
     [layer setNeedsDisplay];
 }
--(void)setWeek:(NSString *)week day:(NSString *)day
+-(void)setMain:(NSString *)week detail:(NSString *)day
 {
     [_weekDayLabel setText:week];
     [_dayLabel setText:day];
