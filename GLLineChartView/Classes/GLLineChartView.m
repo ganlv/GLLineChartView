@@ -35,9 +35,9 @@
 
 -(void)initial
 {
-    self.backgroundColor = [UIColor purpleColor];
+    self.backgroundColor = [UIColor blueColor];
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[[GLCollectionViewLayout alloc] init] ];
-    _collectionView.backgroundColor = [UIColor purpleColor];
+    _collectionView.backgroundColor = [UIColor blueColor];
     [_collectionView registerClass:[GLChartCell class] forCellWithReuseIdentifier:CELL_INDENTIFIER];
     [_collectionView registerClass:[GLCollectionHeader class] forSupplementaryViewOfKind:GLCollectionViewLayoutTop withReuseIdentifier:HEAD_INDENTIFIER];
     _collectionView.dataSource = self;
